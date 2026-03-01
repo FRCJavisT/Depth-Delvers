@@ -1,9 +1,10 @@
 extends Node2D
 
 const WEAPONS = [
-	{"name": "Black Sword", "type": "weapon", "texture_path": "res://Sword Pack/Black Sword.png", "damage": 30, "swing_speed": 1.2, "scale": 4.0},
-	{"name": "Katana", "type": "weapon", "texture_path": "res://Sword Pack/Katana.png", "damage": 35, "swing_speed": 0.8, "scale": 4.0},
-	{"name": "Trident", "type":"weapon","texture_path":"res://Sword Pack/trident.png", "damage": 30, "swing_speed": 1.0, "scale": 3.0}
+	{"name": "Black Sword", "type": "weapon", "texture_path": "res://Sword Pack/Black Sword.png", "damage": 30, "swing_speed": 1.2, "weapon_scale": 4.0, "pickup_scale": 1.0},
+	{"name": "Katana", "type": "weapon", "texture_path": "res://Sword Pack/Katana.png", "damage": 35, "swing_speed": 0.8, "weapon_scale": 4.0, "pickup_scale": 1.0},
+	{"name": "Trident", "type":"weapon","texture_path":"res://Sword Pack/trident.png", "damage": 30, "swing_speed": 1.0, "weapon_scale": 0.5, "pickup_scale": 0.125
+	}
 ]
 
 var item_data: Dictionary = {}
@@ -13,6 +14,8 @@ var player_in_range: bool = false
 func _ready() -> void:
 	item_data = WEAPONS[randi_range(0, WEAPONS.size() - 1)]
 	$"item sprite".texture = load(item_data.texture_path)
+	var s = item_data.pickup_scale
+	$"item sprite".scale = Vector2(s, s)
 	$"item sprite/AnimationPlayer".play("open")
 
 	var area = Area2D.new()
@@ -80,4 +83,6 @@ func _process(_delta: float) -> void:
 			# Become the dropped item so the player can swap back
 			item_data = old_item
 			$"item sprite".texture = load(item_data.texture_path)
+			var s2 = item_data.pickup_scale
+			$"item sprite".scale = Vector2(s2, s2)
 			PromptUI.show_prompt(_prompt_text())
