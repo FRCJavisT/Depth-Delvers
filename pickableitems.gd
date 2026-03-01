@@ -11,8 +11,8 @@ var player_in_range: bool = false
 
 
 func _ready() -> void:
-	var randomnum = WEAPONS[randi_range(0, 6)]
-	if randomnum%2==1:
+	var randomnum = randi_range(5, 5)
+	if randomnum%2==1 and randomnum!=5:
 		item_data=WEAPONS[0]
 	elif randomnum%2==0:
 		item_data=WEAPONS[1]
