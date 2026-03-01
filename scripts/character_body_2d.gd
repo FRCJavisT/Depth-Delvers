@@ -52,7 +52,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack"):
 		if UserInterface.weapon != null and not _is_swinging:
 			_do_swing()
-			
+			$attackarea.monitorable = true
+			$attackarea.monitoring = true
+			$Timer.start()
 
 
 func _do_swing() -> void:
@@ -84,3 +86,8 @@ func _update_weapon() -> void:
 		weapon_anim.play("weapon/pickup")
 	if not weapon_anim.is_playing():
 		weapon_sprite.scale = Vector2(4, 4)
+
+
+func _on_timer_timeout() -> void:
+	$attackarea.monitorable = false
+	$attackarea.monitoring = false

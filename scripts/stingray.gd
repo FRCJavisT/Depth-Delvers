@@ -47,3 +47,13 @@ func _process(delta: float) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body.name == "miner":
 		_player_contact = false
+
+
+func _on_hurt_area_area_entered(area: Area2D) -> void:
+	if area.name == "attackarea":
+		enemyhealth -= UserInterface.damage
+		if enemyhealth < 0:
+			UserInterface.oxygen += 50
+			queue_free()
+			if UserInterface.oxygen > 100:
+				UserInterface.oxygen = 100

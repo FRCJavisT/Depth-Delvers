@@ -155,12 +155,20 @@ visible = false
 texture_filter = 1
 position = Vector2(75, 0)
 rotation = 1.5707964
-scale = Vector2(32, 32)
+scale = Vector2(1e-05, 1e-05)
 
 [node name="WeaponAnimPlayer" type="AnimationPlayer" parent="WeaponPivot" unique_id=617057560]
 libraries/weapon = SubResource("AnimationLibrary_weapon")
 
 [node name="attackarea" type="Area2D" parent="." unique_id=1587476186]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attackarea" unique_id=268810144]
 shape = SubResource("CircleShape2D_4vejd")
+
+[node name="Timer" type="Timer" parent="." unique_id=1231494332]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -131,3 +131,7 @@ offset_top = -122.0
 offset_right = 116.0
 offset_bottom = -95.0
 theme = SubResource("Theme_sfpyh")
+
+[connection signal="area_entered" from="HurtArea" to="." method="_on_hurt_area_area_entered"]
+[connection signal="body_entered" from="HurtArea" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="HurtArea" to="." method="_on_body_exited"]
