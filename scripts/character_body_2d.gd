@@ -32,6 +32,10 @@ func _physics_process(delta):
 		UserInterface.knockback *= 0.7
 	else:
 		velocity = Vector2.ZERO
+	if velocity.x > 0:
+		$playeranimation.flip_v = false  # facing right
+	elif velocity.x < 0:
+		$playeranimation.flip_v = true   # facing left
 	
 	# 3. Apply movement with collision
 	move_and_slide()
