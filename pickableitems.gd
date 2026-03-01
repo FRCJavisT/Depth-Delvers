@@ -1,18 +1,27 @@
 extends Node2D
-
 const WEAPONS = [
 	{"name": "Black Sword", "type": "weapon", "texture_path": "res://Sword Pack/Black Sword.png"},
 	{"name": "Katana", "type": "weapon", "texture_path": "res://Sword Pack/Katana.png"},
-	{"name": "Trident", "type":"weapon","texture_path":"res://Sword Pack/trident.png"}
+	{"name": "Trident", "type": "weapon", "texture_path": "res://Sword Pack/trident.png"},
+	{"name": "OxygenBoost", "type": "powerup", "texture_path": "", "scene_path": "res://scenes/Static objects.tscn"}
 ]
-
 var item_data: Dictionary = {}
 var player_in_range: bool = false
 
-
 func _ready() -> void:
-	item_data = WEAPONS[randi_range(0, WEAPONS.size() - 1)]
-	$"item sprite".texture = load(item_data.texture_path)
+	item_data = WEAPONS[randi_range(0, WEAPONS.size() - 1)].duplicate()
+
+	if item_data.get("scene_path", "") != "":
+		var scene = load(item_data.scene_path).instantiate()
+		var anim_sprite = _find_animated_sprite(scene)
+		if anim_sprite != null:
+			var tex = anim_sprite.sprite_frames.get_frame_texture("default", 2)
+			item_data["texture"] = tex
+			$"item sprite".texture = tex
+		scene.free()
+	else:
+		$"item sprite".texture = load(item_data.texture_path)
+
 	$"item sprite/AnimationPlayer".play("open")
 
 	var area = Area2D.new()
@@ -26,11 +35,18 @@ func _ready() -> void:
 	area.body_exited.connect(_on_body_exited)
 	add_child(area)
 
+func _find_animated_sprite(node: Node) -> AnimatedSprite2D:
+	if node is AnimatedSprite2D:
+		return node
+	for child in node.get_children():
+		var result = _find_animated_sprite(child)
+		if result != null:
+			return result
+	return null
 
 func _prompt_text() -> String:
 	var already_have: bool
 	var slot_full: bool
-
 	if item_data.type == "weapon":
 		already_have = UserInterface.weapon != null and UserInterface.weapon.name == item_data.name
 		slot_full = UserInterface.weapon != null
@@ -38,7 +54,6 @@ func _prompt_text() -> String:
 		already_have = (UserInterface.powerups[0] != null and UserInterface.powerups[0].name == item_data.name) \
 					or (UserInterface.powerups[1] != null and UserInterface.powerups[1].name == item_data.name)
 		slot_full = UserInterface.powerups[0] != null and UserInterface.powerups[1] != null
-
 	if already_have:
 		return item_data.name + "  [Already have this]"
 	elif slot_full:
@@ -46,25 +61,21 @@ func _prompt_text() -> String:
 	else:
 		return item_data.name + "  —  Pick Up"
 
-
 func _already_have() -> bool:
 	if item_data.type == "weapon":
 		return UserInterface.weapon != null and UserInterface.weapon.name == item_data.name
 	return (UserInterface.powerups[0] != null and UserInterface.powerups[0].name == item_data.name) \
 		or (UserInterface.powerups[1] != null and UserInterface.powerups[1].name == item_data.name)
 
-
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "miner":
 		player_in_range = true
 		PromptUI.show_prompt(_prompt_text())
 
-
 func _on_body_exited(body: Node2D) -> void:
 	if body.name == "miner":
 		player_in_range = false
 		PromptUI.hide_prompt()
-
 
 func _process(_delta: float) -> void:
 	if player_in_range and Input.is_action_just_pressed("interact"):
@@ -72,12 +83,19 @@ func _process(_delta: float) -> void:
 			return
 		var old_item = UserInterface.swap_item(item_data)
 		InventoryUI.refresh()
-
 		if old_item.is_empty():
 			PromptUI.hide_prompt()
 			queue_free()
 		else:
-			# Become the dropped item so the player can swap back
 			item_data = old_item
-			$"item sprite".texture = load(item_data.texture_path)
+			if item_data.get("scene_path", "") != "":
+				var scene = load(item_data.scene_path).instantiate()
+				var anim_sprite = _find_animated_sprite(scene)
+				if anim_sprite != null:
+					var tex = anim_sprite.sprite_frames.get_frame_texture("default", 2)
+					item_data["texture"] = tex
+					$"item sprite".texture = tex
+				scene.free()
+			else:
+				$"item sprite".texture = load(item_data.texture_path)
 			PromptUI.show_prompt(_prompt_text())
