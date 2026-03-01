@@ -32,6 +32,10 @@ func _physics_process(delta):
 		UserInterface.knockback *= 0.7
 	else:
 		velocity = Vector2.ZERO
+	if velocity.x > 0:
+		$playeranimation.flip_v = false  # facing right
+	elif velocity.x < 0:
+		$playeranimation.flip_v = true   # facing left
 	
 	# 3. Apply movement with collision
 	move_and_slide()
@@ -54,20 +58,21 @@ func _physics_process(delta):
 			_do_swing()
 			$attackarea.monitorable = true
 			$attackarea.monitoring = true
-			$Timer.start()
+			$Timer.start(0.3 / UserInterface.swing_speed)
 
 
 func _do_swing() -> void:
 	_is_swinging = true
+	var spd = UserInterface.swing_speed
 	var tween = create_tween()
 	# Wind up behind (~70 degrees)
-	tween.tween_property(self, "_swing_offset", -1.2, 0.08) \
+	tween.tween_property(self, "_swing_offset", -1.2, 0.08 / spd) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	# Slash through in a wide arc (~160 degrees total sweep)
-	tween.tween_property(self, "_swing_offset", 1.6, 0.12) \
+	tween.tween_property(self, "_swing_offset", 1.6, 0.12 / spd) \
 		.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	# Snap back to rest
-	tween.tween_property(self, "_swing_offset", 0.0, 0.1) \
+	tween.tween_property(self, "_swing_offset", 0.0, 0.1 / spd) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(func(): _is_swinging = false)
 

@@ -3,27 +3,25 @@ const WEAPONS = [
 	{"name": "Black Sword", "type": "weapon", "texture_path": "res://Sword Pack/Black Sword.png"},
 	{"name": "Katana", "type": "weapon", "texture_path": "res://Sword Pack/Katana.png"},
 	{"name": "Trident", "type": "weapon", "texture_path": "res://Sword Pack/trident.png"},
-	{"name": "OxygenBoost", "type": "powerup", "texture_path": "", "scene_path": "res://scenes/Static objects.tscn"}
+	{"name": "OxygenBoost", "type": "powerup", "texture_path": "", "scene_path": "res://scenes/Static objects.tscn", "frame": 2},
+	{"name": "SpeedBoost", "type": "powerup", "texture_path": "", "scene_path": "res://scenes/Static objects.tscn", "frame": 3}
 ]
 var item_data: Dictionary = {}
 var player_in_range: bool = false
 
 func _ready() -> void:
 	item_data = WEAPONS[randi_range(0, WEAPONS.size() - 1)].duplicate()
-
 	if item_data.get("scene_path", "") != "":
 		var scene = load(item_data.scene_path).instantiate()
 		var anim_sprite = _find_animated_sprite(scene)
 		if anim_sprite != null:
-			var tex = anim_sprite.sprite_frames.get_frame_texture("default", 2)
+			var tex = anim_sprite.sprite_frames.get_frame_texture("default", item_data.get("frame", 0))
 			item_data["texture"] = tex
 			$"item sprite".texture = tex
 		scene.free()
 	else:
 		$"item sprite".texture = load(item_data.texture_path)
-
 	$"item sprite/AnimationPlayer".play("open")
-
 	var area = Area2D.new()
 	area.name = "PickupArea"
 	var shape = CollisionShape2D.new()
@@ -92,7 +90,7 @@ func _process(_delta: float) -> void:
 				var scene = load(item_data.scene_path).instantiate()
 				var anim_sprite = _find_animated_sprite(scene)
 				if anim_sprite != null:
-					var tex = anim_sprite.sprite_frames.get_frame_texture("default", 2)
+					var tex = anim_sprite.sprite_frames.get_frame_texture("default", item_data.get("frame", 0))
 					item_data["texture"] = tex
 					$"item sprite".texture = tex
 				scene.free()
