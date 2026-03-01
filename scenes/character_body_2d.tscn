@@ -155,7 +155,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2brh"]
-size = Vector2(25.460073, 66.243355)
+size = Vector2(10.372622, 39.840313)
 
 [sub_resource type="Animation" id="Animation_pickup"]
 resource_name = "pickup"
@@ -186,7 +186,7 @@ script = ExtResource("1_ij6vw")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=199248913]
 position = Vector2(5, -49)
-amount = 25
+amount = 40
 texture = ExtResource("4_4vejd")
 lifetime = 2.1599999999999997
 randomness = 1.0
@@ -203,7 +203,7 @@ autoplay = "idle"
 frame_progress = 0.98938394
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=772646105]
-position = Vector2(1.0000005, 2.7499986)
+position = Vector2(10, -4)
 scale = Vector2(2.1209679, 2.1209674)
 shape = SubResource("RectangleShape2D_g2brh")
 

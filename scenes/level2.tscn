@@ -963,4 +963,16 @@ position = Vector2(3949.9995, 2587)
 [node name="greenchest3" parent="." unique_id=1243282945 instance=ExtResource("8_hrcei")]
 position = Vector2(3495, -797)
 
+[node name="greenchest4" parent="." unique_id=1793869676 instance=ExtResource("8_hrcei")]
+position = Vector2(-748.00006, 2135.0002)
+
+[node name="greenchest5" parent="." unique_id=152123287 instance=ExtResource("8_hrcei")]
+position = Vector2(-2241.0002, 332.00003)
+
+[node name="greenchest6" parent="." unique_id=651780393 instance=ExtResource("8_hrcei")]
+position = Vector2(2632, -92.99994)
+
+[node name="greenchest7" parent="." unique_id=1746147643 instance=ExtResource("8_hrcei")]
+position = Vector2(-297, -936.99994)
+
 [connection signal="body_entered" from="nextlevel" to="nextlevel" method="_on_body_entered"]
