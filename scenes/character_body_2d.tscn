@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://byydsj5eyoc42" path="res://scripts/character_body_2d.gd" id="1_ij6vw"]
 [ext_resource type="Texture2D" uid="uid://cgwrtuuom703m" path="res://people/scuba-stu-pack-lrg-removebg-preview.png" id="2_g2brh"]
-[ext_resource type="Script" uid="uid://b0dmwaod6ubp4" path="res://scenes/playeranimation.gd" id="3_dn4c7"]
 [ext_resource type="Texture2D" uid="uid://qojs7fv8m82n" path="res://noah-brandow-scuba-diver-male-all-sprite-sheet-2blink-removebg-preview.png" id="3_ws0vm"]
 [ext_resource type="Texture2D" uid="uid://cnhrvk848isw6" path="res://Power_template.png" id="4_4vejd"]
 
@@ -123,7 +122,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 1.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -200,8 +199,8 @@ rotation = -1.3456489
 scale = Vector2(1.1762463, 1.2072515)
 sprite_frames = SubResource("SpriteFrames_t53lx")
 animation = &"idle"
-frame_progress = 0.8676289
-script = ExtResource("3_dn4c7")
+autoplay = "idle"
+frame_progress = 0.99966395
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=772646105]
 position = Vector2(1.0000005, 2.7499986)
