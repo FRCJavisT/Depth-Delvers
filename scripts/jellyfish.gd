@@ -27,14 +27,12 @@ func _process(delta: float) -> void:
 		_origin = global_position
 		_initialized = true
 
-	_time += delta
 	global_position.y = _origin.y + sin(_time * BOB_SPEED + _phase) * BOB_AMPLITUDE
 	global_position.x = _origin.x + sin(_time * DRIFT_SPEED + _phase * 0.7) * DRIFT_RANGE
 
-	if _player_contact:
-		UserInterface.oxygen -= DAMAGE_PER_SECOND * delta
-		if not $GPUParticles2D2.emitting:
-			$GPUParticles2D2.emitting = true
+	if _player_contact and !$GPUParticles2D2.emitting:
+		UserInterface.oxygen -= DAMAGE_PER_SECOND
+		$GPUParticles2D2.emitting = true
 
 
 func _on_body_entered(body: Node2D) -> void:
