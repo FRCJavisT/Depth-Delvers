@@ -2,8 +2,13 @@ extends CanvasLayer
 const SLOT_SIZE = 80
 const MARGIN = 20
 const SPACING = 10
+const NORMAL_BORDER = Color(0.2, 0.85, 0.35, 1.0)
+const SELECTED_BORDER = Color(1.0, 0.85, 0.0, 1.0)
+
 var weapon_icon: TextureRect
 var powerup_icons: Array = []
+var powerup_panels: Array = []
+var selected_slot: int = 0
 
 func _ready() -> void:
 	layer = 10
@@ -16,9 +21,11 @@ func _ready() -> void:
 	container.add_child(weapon_vbox)
 	weapon_icon = weapon_vbox.get_meta("icon")
 	for i in range(2):
-		var pu_vbox = _make_slot("ITEM " + str(i + 1), Color(0.2, 0.85, 0.35, 1.0))
+		var pu_vbox = _make_slot("ITEM " + str(i + 1), NORMAL_BORDER)
 		container.add_child(pu_vbox)
 		powerup_icons.append(pu_vbox.get_meta("icon"))
+		powerup_panels.append(pu_vbox.get_meta("panel"))
+	_update_highlight()
 
 func _make_slot(label_text: String, border_color: Color) -> VBoxContainer:
 	var vbox = VBoxContainer.new()
@@ -51,24 +58,42 @@ func _make_slot(label_text: String, border_color: Color) -> VBoxContainer:
 	panel.add_child(icon)
 	vbox.add_child(panel)
 	vbox.set_meta("icon", icon)
+	vbox.set_meta("panel", panel)
 	return vbox
 
+
 func _process(_delta: float) -> void:
-	if Input.is_key_pressed(KEY_F) and not get_tree().paused:
-		_consume_powerup()
+	if get_tree().paused:
+		return
+	if Input.is_action_just_pressed("select_slot_1"):
+		selected_slot = 0
+		_update_highlight()
+	elif Input.is_action_just_pressed("select_slot_2"):
+		selected_slot = 1
+		_update_highlight()
+	if Input.is_key_pressed(KEY_F):
+		_consume_selected()
 
 
-func _consume_powerup() -> void:
-	for i in range(UserInterface.powerups.size()):
-		if UserInterface.powerups[i] != null:
-			var item = UserInterface.powerups[i]
-			UserInterface.activate_powerup(item)
-			UserInterface.powerups[i] = null
-			refresh()
-			PromptUI.show_prompt(item.name + " activated!")
-			await get_tree().create_timer(1.5).timeout
-			PromptUI.hide_prompt()
-			return
+func _update_highlight() -> void:
+	for i in range(powerup_panels.size()):
+		var panel = powerup_panels[i]
+		var style = panel.get_theme_stylebox("panel") as StyleBoxFlat
+		if i == selected_slot:
+			style.border_color = SELECTED_BORDER
+		else:
+			style.border_color = NORMAL_BORDER
+
+
+func _consume_selected() -> void:
+	if UserInterface.powerups[selected_slot] != null:
+		var item = UserInterface.powerups[selected_slot]
+		UserInterface.activate_powerup(item)
+		UserInterface.powerups[selected_slot] = null
+		refresh()
+		PromptUI.show_prompt(item.name + " activated!", false)
+		await get_tree().create_timer(1.5).timeout
+		PromptUI.hide_prompt()
 
 
 func refresh() -> void:

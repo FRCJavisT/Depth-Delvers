@@ -80,8 +80,9 @@ func _build_ui() -> void:
 	_container.add_child(bg)
 
 
-func show_prompt(text: String) -> void:
+func show_prompt(text: String, show_key: bool = true) -> void:
 	_text_label.text = text
+	_key_label.get_parent().visible = show_key
 	visible = true
 
 

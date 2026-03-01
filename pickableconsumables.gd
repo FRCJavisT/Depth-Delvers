@@ -76,10 +76,9 @@ func _process(_delta: float) -> void:
 		InventoryUI.refresh()
 
 		if old_item.is_empty():
-			PromptUI.show_prompt("Press F to consume")
-			await get_tree().create_timer(2.0).timeout
-			if is_inside_tree():
-				PromptUI.hide_prompt()
+			PromptUI.show_prompt("Press 1/2 to select slot, F to consume", false)
+			$"item sprite".visible = false
+			player_in_range = false
 			queue_free()
 		else:
 			item_data = old_item
