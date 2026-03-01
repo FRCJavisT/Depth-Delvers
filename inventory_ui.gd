@@ -53,11 +53,40 @@ func _make_slot(label_text: String, border_color: Color) -> VBoxContainer:
 	vbox.set_meta("icon", icon)
 	return vbox
 
+func _process(_delta: float) -> void:
+	if Input.is_key_pressed(KEY_F) and not get_tree().paused:
+		_consume_powerup()
+
+
+func _consume_powerup() -> void:
+	for i in range(UserInterface.powerups.size()):
+		if UserInterface.powerups[i] != null:
+			var item = UserInterface.powerups[i]
+			UserInterface.activate_powerup(item)
+			UserInterface.powerups[i] = null
+			refresh()
+			PromptUI.show_prompt(item.name + " activated!")
+			await get_tree().create_timer(1.5).timeout
+			PromptUI.hide_prompt()
+			return
+
+
 func refresh() -> void:
 	if UserInterface.weapon != null:
 		weapon_icon.texture = load(UserInterface.weapon.texture_path)
 	else:
 		weapon_icon.texture = null
+
+	for i in range(2):
+		if UserInterface.powerups[i] != null:
+			var item = UserInterface.powerups[i]
+			if item.has("texture"):
+				powerup_icons[i].texture = item["texture"]
+			elif item.has("texture_path"):
+				powerup_icons[i].texture = load(item.texture_path)
+		else:
+			powerup_icons[i].texture = null
+
 
 func restart() -> void:
 	weapon_icon.texture = null

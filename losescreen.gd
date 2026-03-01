@@ -13,6 +13,15 @@ func _on_button_pressed() -> void:
 	UserInterface.level = 0
 	UserInterface.weapon = null
 	UserInterface.powerups = [null, null]
-	InventoryUI.refresh()
+	UserInterface.damage = 30
+	UserInterface.base_damage = 30
+	UserInterface.swing_speed = 1.0
+	UserInterface.speed_multiplier = 1.0
+	UserInterface.damage_multiplier = 1.0
+	# Remove any active powerup timers
+	for child in UserInterface.get_children():
+		if child is Timer:
+			child.queue_free()
+	InventoryUI.restart()
 	transition.transition("res://scenes/level.tscn")
 	visible = false

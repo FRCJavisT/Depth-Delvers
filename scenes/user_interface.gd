@@ -6,9 +6,11 @@ var downmeters = 0
 var knockback = 0
 var shakeamount = 0
 var damage = 30
+var base_damage = 30
 var swing_speed = 1.0
+var speed_multiplier = 1.0
+var damage_multiplier = 1.0
 # Inventory: 1 weapon slot, 2 powerup slots
-# Each item is a Dictionary: { name, type, texture_path, damage, swing_speed }
 var weapon = null
 var powerups = [null, null]
 
@@ -18,7 +20,8 @@ func swap_item(item_data: Dictionary) -> Dictionary:
 	if item_data.type == "weapon":
 		var old = weapon if weapon != null else {}
 		weapon = item_data
-		damage = item_data.get("damage", 30)
+		base_damage = item_data.get("damage", 30)
+		damage = int(base_damage * damage_multiplier)
 		swing_speed = item_data.get("swing_speed", 1.0)
 		return old
 	elif item_data.type == "powerup":
@@ -33,3 +36,33 @@ func swap_item(item_data: Dictionary) -> Dictionary:
 		return old
 
 	return {}
+
+
+func activate_powerup(item_data: Dictionary) -> void:
+	if item_data.name == "Oxygen Tank":
+		oxygen = min(oxygen + 50, 100)
+	elif item_data.name == "Speed Potion":
+		speed_multiplier = 2.0
+		_start_timer(15.0, "_on_speed_expire")
+	elif item_data.name == "Damage Potion":
+		damage_multiplier = 1.5
+		damage = int(base_damage * damage_multiplier)
+		_start_timer(15.0, "_on_damage_expire")
+
+
+func _start_timer(duration: float, callback: String) -> void:
+	var timer = Timer.new()
+	timer.wait_time = duration
+	timer.one_shot = true
+	timer.timeout.connect(Callable(self, callback))
+	add_child(timer)
+	timer.start()
+
+
+func _on_speed_expire() -> void:
+	speed_multiplier = 1.0
+
+
+func _on_damage_expire() -> void:
+	damage_multiplier = 1.0
+	damage = base_damage
