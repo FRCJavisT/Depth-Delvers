@@ -58,6 +58,6 @@ func _on_hurt_area_area_entered(area: Area2D) -> void:
 		if enemyhealth < 0:
 			UserInterface.oxygen += 20
 			UserInterface.shakeamount += 80
-			queue_free()
+			$AnimationPlayer.play("death")
 			if UserInterface.oxygen > 100:
 				UserInterface.oxygen = 100
