@@ -44,7 +44,9 @@ func _physics_process(delta):
 		$playeranimation.flip_v = false  # facing right
 	elif velocity.x < 0:
 		$playeranimation.flip_v = true   # facing left
-	UserInterface.shakeamount += (abs(velocity.x) + abs(velocity.y))/2000
+	var approxspeed = (abs(velocity.x) + abs(velocity.y))/2000
+	UserInterface.shakeamount += approxspeed
+	scale = Vector2(1.176 - approxspeed / 5, 1.207 - approxspeed / 5)
 	# 3. Apply movement with collision
 	move_and_slide()
 
