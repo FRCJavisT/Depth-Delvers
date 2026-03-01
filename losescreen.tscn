@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bwgbbhhsgxyeb"]
 
 [ext_resource type="Script" uid="uid://cu8hutp525nml" path="res://losescreen.gd" id="1_g3uia"]
+[ext_resource type="Theme" uid="uid://g3t1lj8d0ewr" path="res://texttheme.tres" id="2_n7u8t"]
 
 [node name="losescreen" type="CanvasLayer" unique_id=821707658]
 process_mode = 3
 layer = 5
-visible = false
 script = ExtResource("1_g3uia")
 
 [node name="Label" type="Label" parent="." unique_id=658228623]
@@ -14,9 +14,9 @@ anchor_left = 0.101996526
 anchor_right = 0.89800346
 anchor_bottom = 0.4212963
 grow_horizontal = 2
+theme = ExtResource("2_n7u8t")
 theme_override_font_sizes/font_size = 200
 text = "You Lose!"
-metadata/_edit_use_anchors_ = true
 
 [node name="highscore" type="Label" parent="." unique_id=356210598]
 anchors_preset = 8
@@ -31,6 +31,7 @@ offset_bottom = 214.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_n7u8t")
 theme_override_font_sizes/font_size = 100
 text = "Highscore:"
 horizontal_alignment = 1

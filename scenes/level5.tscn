@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dtcw6bc0fitj" path="res://scenes/character_body_2d.tscn" id="1_v4gm1"]
 [ext_resource type="Script" uid="uid://domvdq6ryi2ea" path="res://scenes/camera_2d.gd" id="2_g54xt"]
 [ext_resource type="Script" uid="uid://da1hytj0xj3hl" path="res://scenes/progress_bar.gd" id="3_7pj42"]
+[ext_resource type="Theme" uid="uid://g3t1lj8d0ewr" path="res://texttheme.tres" id="4_g54xt"]
 [ext_resource type="Script" uid="uid://c7b6vkjhjtawj" path="res://scenes/text_edit.gd" id="4_thmvh"]
 [ext_resource type="Texture2D" uid="uid://c7ml23lvb2c6t" path="res://sprites/sheet.png" id="6_teump"]
 [ext_resource type="Script" uid="uid://badcxlsojw6ep" path="res://scenes/nextlevel.gd" id="7_oe7sd"]
@@ -916,6 +917,7 @@ offset_top = -88.0
 offset_right = 436.0
 offset_bottom = -27.0
 grow_vertical = 0
+theme = ExtResource("4_g54xt")
 theme_override_font_sizes/font_size = 44
 text = "fasdf"
 script = ExtResource("4_thmvh")
