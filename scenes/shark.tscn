@@ -1,19 +1,142 @@
 [gd_scene format=3 uid="uid://doa5ke4kj1oxm"]
 
-[ext_resource type="Texture2D" uid="uid://ct2f5vt3w7urn" path="res://sprites/icon.svg" id="1_8l5qy"]
-[ext_resource type="Script" uid="uid://du1io74yy2imo" path="res://scripts/shark.gd" id="1_v5iaq"]
+[ext_resource type="Script" uid="uid://cvpkfnixsqjk8" path="res://scenes/shark.gd" id="1_po4rd"]
+[ext_resource type="Texture2D" uid="uid://cnhrvk848isw6" path="res://Power_template.png" id="2_f40hg"]
+[ext_resource type="Texture2D" uid="uid://bnlv6k7wtf1wr" path="res://sprites/image-removebg-preview.png" id="3_4m6ut"]
+[ext_resource type="Texture2D" uid="uid://cwihaqttefq7b" path="res://Shark Sprite/Shark1.png" id="4_by2yj"]
+[ext_resource type="Texture2D" uid="uid://bki3auf03tkfa" path="res://Shark Sprite/Shark2.png" id="5_iruha"]
+[ext_resource type="Texture2D" uid="uid://n7ujpoxu0a75" path="res://Shark Sprite/Shark3.png" id="6_5gxhj"]
+[ext_resource type="Texture2D" uid="uid://c0sawexa7i6fc" path="res://Shark Sprite/Shark4.png" id="7_8fvna"]
+[ext_resource type="Texture2D" uid="uid://c2sd8c3w4rqpv" path="res://Shark Sprite/Shark5.png" id="8_s5fkw"]
+[ext_resource type="Texture2D" uid="uid://cdpurlty5idey" path="res://Shark Sprite/Shark6.png" id="9_r3v1s"]
+[ext_resource type="Texture2D" uid="uid://sbg4hq2oesh0" path="res://Shark Sprite/Shark7.png" id="10_qfx6c"]
+[ext_resource type="Texture2D" uid="uid://d31xcdibsvall" path="res://Shark Sprite/Shark8.png" id="11_g7nwe"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5iaq"]
-size = Vector2(524, 109)
+[sub_resource type="Gradient" id="Gradient_33l23"]
+colors = PackedColorArray(1, 1, 1, 1, 0.043137256, 0.31764707, 1, 0)
 
-[node name="shark" type="CharacterBody2D" unique_id=2102375293]
-script = ExtResource("1_v5iaq")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ond1r"]
+gradient = SubResource("Gradient_33l23")
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=1348944412]
-position = Vector2(253, 53)
-scale = Vector2(4.140625, 0.828125)
-texture = ExtResource("1_8l5qy")
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vr0jt"]
+particle_flag_disable_z = true
+angle_min = -162.2
+angle_max = 45.00001
+spread = 31.765
+initial_velocity_min = -75.0
+initial_velocity_max = 75.89
+gravity = Vector3(0, -90, 0)
+scale_min = 0.25
+color_ramp = SubResource("GradientTexture1D_ond1r")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=86543027]
-position = Vector2(252, 44.5)
-shape = SubResource("RectangleShape2D_v5iaq")
+[sub_resource type="Gradient" id="Gradient_ond1r"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0.7529412, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_33l23"]
+gradient = SubResource("Gradient_ond1r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_33l23"]
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+spread = 180.0
+initial_velocity_min = 117.07
+initial_velocity_max = 234.18
+gravity = Vector3(0, 0, 0)
+scale_min = 0.049999997
+scale_max = 0.099999994
+color_ramp = SubResource("GradientTexture1D_33l23")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vr0jt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_by2yj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iruha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5gxhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8fvna")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_s5fkw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_r3v1s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qfx6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_g7nwe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 62.0
+height = 157.99998
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hurt"]
+radius = 74.00005
+height = 322.0001
+
+[sub_resource type="Theme" id="Theme_sfpyh"]
+
+[node name="shark" type="CharacterBody2D" unique_id=613965640]
+script = ExtResource("1_po4rd")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2101799373]
+position = Vector2(39, -9)
+amount = 25
+texture = ExtResource("2_f40hg")
+lifetime = 2.1599999999999997
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_vr0jt")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=1923759523]
+position = Vector2(39, -10)
+emitting = false
+amount = 20
+texture = ExtResource("3_4m6ut")
+one_shot = true
+explosiveness = 0.75
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_33l23")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=589016678]
+texture_filter = 1
+position = Vector2(-2, 14)
+scale = Vector2(7, 7.999)
+sprite_frames = SubResource("SpriteFrames_vr0jt")
+autoplay = "default"
+frame_progress = 0.9088113
+
+[node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=1415973142]
+position = Vector2(-10, 3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="HurtArea" type="Area2D" parent="." unique_id=719937315]
+
+[node name="HurtShape" type="CollisionShape2D" parent="HurtArea" unique_id=2022816422]
+position = Vector2(-5, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hurt")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1913419550]
+offset_left = -118.0
+offset_top = -122.0
+offset_right = 116.0
+offset_bottom = -95.0
+theme = SubResource("Theme_sfpyh")
+
+[connection signal="area_entered" from="HurtArea" to="." method="_on_hurt_area_area_entered"]
+[connection signal="body_entered" from="HurtArea" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="HurtArea" to="." method="_on_body_exited"]
