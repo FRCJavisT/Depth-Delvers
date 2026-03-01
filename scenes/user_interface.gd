@@ -10,6 +10,7 @@ var base_damage = 30
 var swing_speed = 1.0
 var speed_multiplier = 1.0
 var damage_multiplier = 1.0
+var active_timers: Dictionary = {}  # "Speed Potion" -> Timer, "Damage Potion" -> Timer
 # Inventory: 1 weapon slot, 2 powerup slots
 var weapon = null
 var powerups = [null, null]
@@ -43,20 +44,25 @@ func activate_powerup(item_data: Dictionary) -> void:
 		oxygen = min(oxygen + 50, 100)
 	elif item_data.name == "Speed Potion":
 		speed_multiplier = 2.0
-		_start_timer(15.0, "_on_speed_expire")
+		_start_timer(15.0, "_on_speed_expire", "Speed Potion")
 	elif item_data.name == "Damage Potion":
 		damage_multiplier = 1.5
 		damage = int(base_damage * damage_multiplier)
-		_start_timer(15.0, "_on_damage_expire")
+		_start_timer(15.0, "_on_damage_expire", "Damage Potion")
 
 
-func _start_timer(duration: float, callback: String) -> void:
+func _start_timer(duration: float, callback: String, potion_name: String) -> void:
+	# Remove old timer if re-consuming the same potion
+	if active_timers.has(potion_name):
+		active_timers[potion_name].queue_free()
 	var timer = Timer.new()
 	timer.wait_time = duration
 	timer.one_shot = true
 	timer.timeout.connect(Callable(self, callback))
+	timer.timeout.connect(func(): active_timers.erase(potion_name))
 	add_child(timer)
 	timer.start()
+	active_timers[potion_name] = timer
 
 
 func _on_speed_expire() -> void:

@@ -10,7 +10,10 @@ var powerup_icons: Array = []
 var powerup_panels: Array = []
 var powerup_vboxes: Array = []
 var arrow_label: Label
+var timer_container: VBoxContainer
+var timer_labels: Dictionary = {}  # potion_name -> Label
 var selected_slot: int = 0
+var _f_was_pressed: bool = false
 
 func _ready() -> void:
 	layer = 10
@@ -28,6 +31,13 @@ func _ready() -> void:
 		powerup_icons.append(pu_vbox.get_meta("icon"))
 		powerup_panels.append(pu_vbox.get_meta("panel"))
 		powerup_vboxes.append(pu_vbox)
+
+	# Timer display above inventory
+	timer_container = VBoxContainer.new()
+	timer_container.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
+	timer_container.position = Vector2(MARGIN, -(MARGIN + SLOT_SIZE + 70))
+	timer_container.add_theme_constant_override("separation", 4)
+	add_child(timer_container)
 
 	# Arrow indicator above the selected slot
 	arrow_label = Label.new()
@@ -89,8 +99,11 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("select_slot_2"):
 		selected_slot = 1
 		_update_highlight()
-	if Input.is_key_pressed(KEY_F):
+	var f_down = Input.is_key_pressed(KEY_F)
+	if f_down and not _f_was_pressed:
 		_consume_selected()
+	_f_was_pressed = f_down
+	_update_timers()
 
 
 func _update_highlight() -> void:
@@ -108,6 +121,31 @@ func _update_highlight() -> void:
 		var panel = powerup_panels[selected_slot]
 		var panel_center_x = vbox.global_position.x + panel.position.x + SLOT_SIZE / 2.0
 		arrow_label.position = Vector2(panel_center_x - 10, vbox.global_position.y - 22)
+
+
+func _update_timers() -> void:
+	# Add labels for new active timers
+	for potion_name in UserInterface.active_timers:
+		if not timer_labels.has(potion_name):
+			var label = Label.new()
+			label.add_theme_font_size_override("font_size", 14)
+			label.add_theme_color_override("font_color", Color(1.0, 0.9, 0.3, 1.0))
+			label.add_theme_constant_override("outline_size", 2)
+			label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+			timer_container.add_child(label)
+			timer_labels[potion_name] = label
+	# Update or remove labels
+	var to_remove: Array = []
+	for potion_name in timer_labels:
+		if UserInterface.active_timers.has(potion_name):
+			var timer = UserInterface.active_timers[potion_name]
+			var secs = ceil(timer.time_left)
+			timer_labels[potion_name].text = potion_name + "  " + str(int(secs)) + "s"
+		else:
+			timer_labels[potion_name].queue_free()
+			to_remove.append(potion_name)
+	for key in to_remove:
+		timer_labels.erase(key)
 
 
 func _consume_selected() -> void:
@@ -142,3 +180,6 @@ func restart() -> void:
 	weapon_icon.texture = null
 	for icon in powerup_icons:
 		icon.texture = null
+	for label in timer_labels.values():
+		label.queue_free()
+	timer_labels.clear()

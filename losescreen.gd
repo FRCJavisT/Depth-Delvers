@@ -22,6 +22,7 @@ func _on_button_pressed() -> void:
 	for child in UserInterface.get_children():
 		if child is Timer:
 			child.queue_free()
+	UserInterface.active_timers.clear()
 	InventoryUI.restart()
 	transition.transition("res://scenes/level.tscn")
 	visible = false
