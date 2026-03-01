@@ -12,6 +12,7 @@ var _player=null
 @export var enemyhealth = 100
 
 func _ready() -> void:
+	enemyhealth = int(enemyhealth * pow(1.25, UserInterface.level))
 	# Randomise start time and direction so each stingray feels independent
 	_time = randf() * TAU
 	_direction = 1.0 if randf() > 0.5 else -1.0
