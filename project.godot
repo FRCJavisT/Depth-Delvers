@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Hungry Shark Evolution"
-run/main_scene="uid://du8enbqkh6m55"
+run/main_scene="uid://ew1tqrjoh82i"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://sprites/icon.svg"
 
@@ -22,7 +22,6 @@ InventoryUI="*res://inventory_ui.gd"
 LayerPopup="*res://layer_popup.gd"
 EnemySpawner="*res://enemy_spawner.gd"
 Losescreen="*res://losescreen.tscn"
-<<<<<<<Updatedupstream<<<<<<<Updatedupstream<<<<<<<UpdatedupstreamPromptUI="*res://prompt_ui.gd"
 PromptUI="*res://prompt_ui.gd"
 transition="*res://canvas_layer.tscn"
 Parallax2d="*res://parallax_2d.tscn"
@@ -30,7 +29,10 @@ GlobalWorldEnvironment="*uid://bd75ipswg6qls"
 
 [display]
 
+window/size/viewport_width=1152
+window/size/viewport_height=648
 window/size/mode=4
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [input]
