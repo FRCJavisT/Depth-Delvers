@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://yp2oh82bmjwi"]
 
-[ext_resource type="Script" path="res://pickableconsumables.gd" id="1_mna54"]
+[ext_resource type="Script" uid="uid://c0ve2w1xxa8mv" path="res://pickableconsumables.gd" id="1_mna54"]
 
 [sub_resource type="Animation" id="Animation_wh125"]
 length = 0.001

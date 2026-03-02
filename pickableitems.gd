@@ -11,13 +11,12 @@ var player_in_range: bool = false
 
 
 func _ready() -> void:
-	var randomnum = randi_range(1, 5)
-	print (randomnum)
-	if randomnum%2==1 and randomnum!=5:
+	var randomnum = randi_range(1, 15)
+	if randomnum < 7:
 		item_data=WEAPONS[0]
-	elif randomnum%2==0 and randomnum!=5:
+	if randomnum < 15 and randomnum > 7:
 		item_data=WEAPONS[1]
-	elif randomnum==5:
+	if randomnum==15:
 		item_data=WEAPONS[2]
 	item_data = WEAPONS[randi_range(0, WEAPONS.size() - 1)]
 	var itemnum=WEAPONS.find(item_data)

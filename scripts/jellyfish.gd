@@ -36,6 +36,7 @@ func _process(delta: float) -> void:
 	$ProgressBar.value = enemyhealth
 	if _player_contact and !$GPUParticles2D2.emitting and $Timer.is_stopped():
 		UserInterface.knockback = -10
+		$AudioStreamPlayer2.play()
 		UserInterface.oxygen -= DAMAGE_PER_SECOND
 		$Timer.start()
 		$GPUParticles2D2.emitting = true
@@ -53,6 +54,7 @@ func _on_body_exited(body: Node2D) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.name == "attackarea":
+		$AudioStreamPlayer3.play()
 		enemyhealth -= UserInterface.damage
 		UserInterface.shakeamount += 40
 		$bloodeffect.emitting = true
