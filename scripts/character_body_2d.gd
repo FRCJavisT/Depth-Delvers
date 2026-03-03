@@ -36,9 +36,9 @@ func _physics_process(delta):
 	else:
 		velocity = Vector2.ZERO
 	if velocity.x > 0:
-		$playeranimation.flip_v = false
+		$playeranimation.flip_h = false
 	elif velocity.x < 0:
-		$playeranimation.flip_v = true
+		$playeranimation.flip_h = true
 	var approxspeed = (abs(velocity.x) + abs(velocity.y))/2000
 	UserInterface.shakeamount += approxspeed
 	scale = Vector2(1.176 - approxspeed / 5, 1.207 - approxspeed / 5)
