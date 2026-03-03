@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cgwrtuuom703m" path="res://people/scuba-stu-pack-lrg-removebg-preview.png" id="2_g2brh"]
 [ext_resource type="Texture2D" uid="uid://qojs7fv8m82n" path="res://noah-brandow-scuba-diver-male-all-sprite-sheet-2blink-removebg-preview.png" id="3_ws0vm"]
 [ext_resource type="Texture2D" uid="uid://cnhrvk848isw6" path="res://Power_template.png" id="4_4vejd"]
+[ext_resource type="AudioStream" uid="uid://bxobe8yp4ra8k" path="res://scripts/musicholder-sword-sound-260274.mp3" id="5_ws0vm"]
 
 [sub_resource type="Gradient" id="Gradient_4vejd"]
 colors = PackedColorArray(1, 1, 1, 1, 0.043137256, 0.31764707, 1, 0)
@@ -178,8 +179,9 @@ _data = {
 &"pickup": SubResource("Animation_pickup")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4vejd"]
-radius = 121.80723
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ws0vm"]
+radius = 64.0
+height = 132.0
 
 [node name="Player" type="CharacterBody2D" unique_id=297162121]
 script = ExtResource("1_ij6vw")
@@ -224,10 +226,14 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attackarea" unique_id=268810144]
-shape = SubResource("CircleShape2D_4vejd")
+position = Vector2(6, -72)
+shape = SubResource("CapsuleShape2D_ws0vm")
 
 [node name="Timer" type="Timer" parent="." unique_id=1231494332]
 wait_time = 0.3
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1848652095]
+stream = ExtResource("5_ws0vm")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

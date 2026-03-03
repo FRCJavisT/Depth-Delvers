@@ -212,7 +212,7 @@ func _create_settings_menu() -> void:
 	panel_bg.set_anchors_preset(Control.PRESET_CENTER)
 	# Use a centered panel sized for typical 1920x1080 fullscreen
 	# Content area is 600x360 which looks good on 1080p while leaving margins
-	panel_bg.custom_minimum_size = Vector2(600, 360)
+	panel_bg.custom_minimum_size = Vector2(1920, 1080)
 	panel_bg.color = Color(0.0, 0.3, 0.5, 0.8)
 	settings_menu.add_child(panel_bg)
 	
