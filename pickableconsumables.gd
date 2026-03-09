@@ -1,28 +1,55 @@
 extends Node2D
 
-const SPRITESHEET = preload("res://Power Ups/platformer items - free assets/static_items.png")
+const ANIM_SHEET = preload("res://Power Ups/platformer items - free assets/animated_items.png")
+const OXYGEN_TANK_TEX = preload("res://OxygenTankNew.png")
+const STRENGTH_POTION_TEX = preload("res://StrengthPotionNew.png")
+
+# Gold sparkle animation from animated_items.png, row 8 (y=256), 8 frames of 32x32
+const SPEED_FRAMES = [
+	Rect2(0, 256, 32, 32),
+	Rect2(32, 256, 32, 32),
+	Rect2(64, 256, 32, 32),
+	Rect2(96, 256, 32, 32),
+	Rect2(128, 256, 32, 32),
+	Rect2(160, 256, 32, 32),
+	Rect2(192, 256, 32, 32),
+	Rect2(224, 256, 32, 32),
+]
+const SPEED_FRAME_RATE = 0.1  # 10 fps
 
 const CONSUMABLES = [
-	{"name": "Oxygen Tank", "type": "powerup", "frame": 0, "region": Rect2(64, 0, 32, 32)},
-	{"name": "Speed Potion", "type": "powerup", "frame": 1, "region": Rect2(0, 64, 32, 32)},
-	{"name": "Damage Potion", "type": "powerup", "frame": 2, "region": Rect2(32, 64, 32, 32)}
+	{"name": "Oxygen Tank", "type": "powerup"},
+	{"name": "Speed Potion", "type": "powerup"},
+	{"name": "Damage Potion", "type": "powerup"},
 ]
 
 var item_data: Dictionary = {}
 var player_in_range: bool = false
+var speed_frame: int = 0
+var speed_frame_timer: float = 0.0
 
 
-func _make_texture(region: Rect2) -> AtlasTexture:
+func _make_speed_texture() -> AtlasTexture:
 	var tex = AtlasTexture.new()
-	tex.atlas = SPRITESHEET
-	tex.region = region
+	tex.atlas = ANIM_SHEET
+	tex.region = SPEED_FRAMES[speed_frame]
 	return tex
+
+
+func _apply_texture() -> void:
+	match item_data.name:
+		"Oxygen Tank":
+			$"item sprite".texture = OXYGEN_TANK_TEX
+		"Speed Potion":
+			$"item sprite".texture = _make_speed_texture()
+		"Damage Potion":
+			$"item sprite".texture = STRENGTH_POTION_TEX
+	item_data["texture"] = $"item sprite".texture
 
 
 func _ready() -> void:
 	item_data = CONSUMABLES[randi_range(0, CONSUMABLES.size() - 1)].duplicate()
-	item_data["texture"] = _make_texture(item_data.region)
-	$"item sprite".texture = item_data.texture
+	_apply_texture()
 	$"item sprite".scale = Vector2(0.5, 0.5)
 	$"item sprite/AnimationPlayer".play("open")
 
@@ -68,7 +95,15 @@ func _on_body_exited(body: Node2D) -> void:
 		PromptUI.hide_prompt()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	# Animate speed potion glow
+	if item_data.get("name") == "Speed Potion":
+		speed_frame_timer += delta
+		if speed_frame_timer >= SPEED_FRAME_RATE:
+			speed_frame_timer = 0.0
+			speed_frame = (speed_frame + 1) % SPEED_FRAMES.size()
+			$"item sprite".texture = _make_speed_texture()
+
 	if player_in_range and Input.is_action_just_pressed("interact"):
 		if _already_have():
 			return
@@ -82,5 +117,7 @@ func _process(_delta: float) -> void:
 			queue_free()
 		else:
 			item_data = old_item
-			$"item sprite".texture = item_data.texture
+			speed_frame = 0
+			speed_frame_timer = 0.0
+			_apply_texture()
 			PromptUI.show_prompt(_prompt_text())

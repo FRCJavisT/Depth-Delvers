@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5sfr71lvkq5c"
-path="res://.godot/imported/strengthpotion.png-3842d478eae670f3ab269ddb31292442.ctex"
+uid="uid://cu85wctfc6dlu"
+path="res://.godot/imported/speedspritesheet2.png-87eda06e2407a6baf0618743741fed28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://strengthpotion.png"
-dest_files=["res://.godot/imported/strengthpotion.png-3842d478eae670f3ab269ddb31292442.ctex"]
+source_file="res://speedspritesheet2.png"
+dest_files=["res://.godot/imported/speedspritesheet2.png-87eda06e2407a6baf0618743741fed28.ctex"]
 
 [params]
 

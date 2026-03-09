@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca7uijqb2ru41"
-path="res://.godot/imported/Potions (From PixelTime).png-f6261e34405decd273b84d845cddf6af.ctex"
+uid="uid://dl11ol1ce8m6j"
+path="res://.godot/imported/OxygenTankNew.png-3861b8620a4241c5d381cd31e3222e9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://background 4/Potions (From PixelTime).png"
-dest_files=["res://.godot/imported/Potions (From PixelTime).png-f6261e34405decd273b84d845cddf6af.ctex"]
+source_file="res://OxygenTankNew.png"
+dest_files=["res://.godot/imported/OxygenTankNew.png-3861b8620a4241c5d381cd31e3222e9b.ctex"]
 
 [params]
 

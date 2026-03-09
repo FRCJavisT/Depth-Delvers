@@ -26,7 +26,7 @@ func _ready() -> void:
 	container.add_child(weapon_vbox)
 	weapon_icon = weapon_vbox.get_meta("icon")
 	for i in range(2):
-		var pu_vbox = _make_slot("ITEM " + str(i + 1), NORMAL_BORDER, str(i + 1))
+		var pu_vbox = _make_slot("ITEM " + str(i + 1), NORMAL_BORDER, str(i + 1), 20)
 		container.add_child(pu_vbox)
 		powerup_icons.append(pu_vbox.get_meta("icon"))
 		powerup_panels.append(pu_vbox.get_meta("panel"))
@@ -48,7 +48,7 @@ func _ready() -> void:
 	add_child(arrow_label)
 	_update_highlight()
 
-func _make_slot(label_text: String, border_color: Color, keybind: String = "") -> VBoxContainer:
+func _make_slot(label_text: String, border_color: Color, keybind: String = "", icon_padding: int = 8) -> VBoxContainer:
 	var vbox = VBoxContainer.new()
 	vbox.add_theme_constant_override("separation", 4)
 	var label = Label.new()
@@ -72,10 +72,10 @@ func _make_slot(label_text: String, border_color: Color, keybind: String = "") -
 	icon.set_anchors_preset(Control.PRESET_FULL_RECT)
 	icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.offset_left = 8
-	icon.offset_top = 8
-	icon.offset_right = -8
-	icon.offset_bottom = -8
+	icon.offset_left = icon_padding
+	icon.offset_top = icon_padding
+	icon.offset_right = -icon_padding
+	icon.offset_bottom = -icon_padding
 	panel.add_child(icon)
 	vbox.add_child(panel)
 	if keybind != "":
