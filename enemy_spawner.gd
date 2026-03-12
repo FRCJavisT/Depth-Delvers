@@ -15,9 +15,9 @@ func _process(_delta: float) -> void:
 	var current = get_tree().current_scene
 	if current != null and current != _last_scene:
 		_last_scene = current
-		JELLYFISH_COUNT = 6 + UserInterface.level * 2
-		STINGRAY_COUNT = 4 + UserInterface.level * 1
-		CRAB_COUNT = 10 + UserInterface.level * 2
+		JELLYFISH_COUNT = 6 + UserInterface.level * 4
+		STINGRAY_COUNT = 4 + UserInterface.level * 2
+		CRAB_COUNT = 10 + UserInterface.level * 6
 		call_deferred("_spawn_enemies")
 
 
