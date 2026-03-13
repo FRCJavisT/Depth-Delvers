@@ -1,6 +1,7 @@
 extends Node
 
 var oxygen = 100
+var hasdonetutorial = false
 var level = 0
 var downmeters = 0
 var knockback = 0

@@ -2,13 +2,189 @@
 
 [ext_resource type="PackedScene" uid="uid://dtcw6bc0fitj" path="res://scenes/character_body_2d.tscn" id="1_2q6dc"]
 [ext_resource type="Script" uid="uid://domvdq6ryi2ea" path="res://scenes/camera_2d.gd" id="2_ppgk2"]
+[ext_resource type="Script" uid="uid://bi4ilwby8toq5" path="res://scenes/tutorial.gd" id="3_t1rx8"]
 [ext_resource type="Script" uid="uid://da1hytj0xj3hl" path="res://scenes/progress_bar.gd" id="3_w8frs"]
 [ext_resource type="Theme" uid="uid://g3t1lj8d0ewr" path="res://texttheme.tres" id="4_8c41q"]
 [ext_resource type="Texture2D" uid="uid://c7ml23lvb2c6t" path="res://sprites/sheet.png" id="4_mx8sn"]
 [ext_resource type="Script" uid="uid://c7b6vkjhjtawj" path="res://scenes/text_edit.gd" id="5_2r41h"]
+[ext_resource type="Texture2D" uid="uid://dbwe17mq5ldmc" path="res://layers/GWPFigure21-removebg-preview.png" id="6_olg7q"]
 [ext_resource type="Script" uid="uid://badcxlsojw6ep" path="res://scenes/nextlevel.gd" id="7_klq6b"]
 [ext_resource type="PackedScene" uid="uid://xj7ppbg44tyb" path="res://scenes/greenchest.tscn" id="8_8c41q"]
+[ext_resource type="Texture2D" uid="uid://dye2bdvih07sg" path="res://spritesheet.webp" id="8_8iemx"]
 [ext_resource type="PackedScene" uid="uid://0veg74najmgo" path="res://scenes/chest.tscn" id="8_b121j"]
+[ext_resource type="Texture2D" uid="uid://paf7tybjrn0h" path="res://animation_1-8.png" id="9_64w2a"]
+[ext_resource type="Texture2D" uid="uid://pen4687bluee" path="res://Sword Pack/Black Sword.png" id="10_fpun6"]
+
+[sub_resource type="Animation" id="Animation_8iemx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("User Interface/tutorial1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("User Interface/tutorial2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("User Interface/tutorial3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("User Interface/tutorial4:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_64w2a"]
+resource_name = "step1finished"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("User Interface/tutorial1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5882353), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("User Interface/tutorial2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.5882353)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("User Interface/tutorial1")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_fpun6"]
+resource_name = "step2finished"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("User Interface/tutorial2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5882353), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("User Interface/tutorial3:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.5882353)]
+}
+
+[sub_resource type="Animation" id="Animation_wc255"]
+resource_name = "step3finished"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("User Interface/tutorial3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5882353), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("User Interface/tutorial4:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.5882353)]
+}
+
+[sub_resource type="Animation" id="Animation_arp2o"]
+resource_name = "step4finished"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("User Interface/tutorial4:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5882353), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fpun6"]
+_data = {
+&"RESET": SubResource("Animation_8iemx"),
+&"step1finished": SubResource("Animation_64w2a"),
+&"step2finished": SubResource("Animation_fpun6"),
+&"step3finished": SubResource("Animation_wc255"),
+&"step4finished": SubResource("Animation_arp2o")
+}
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_2r41h"]
 tile_data = PackedInt32Array(0, 131072, 5, 1, 262144, 1, 2, 262144, 1, 3, 262144, 1, 4, 262144, 1, 5, 262144, 1, 6, 262144, 1, 7, 262144, 1, 8, 262144, 1, 9, 131072, 4)
@@ -891,7 +1067,12 @@ offset_factor = 0.1
 player = NodePath("..")
 
 [node name="User Interface" type="CanvasLayer" parent="." unique_id=1002592507]
+script = ExtResource("3_t1rx8")
 metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="User Interface" unique_id=486755067]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_fpun6")
 
 [node name="ProgressBar" type="ProgressBar" parent="User Interface" unique_id=1959476848]
 anchors_preset = 3
@@ -919,6 +1100,177 @@ theme = ExtResource("4_8c41q")
 theme_override_font_sizes/font_size = 44
 text = "fasdf"
 script = ExtResource("5_2r41h")
+
+[node name="tutorial1" type="Control" parent="User Interface" unique_id=1861343557]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="User Interface/tutorial1" unique_id=1050851830]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = 106.0
+offset_right = 982.0
+offset_bottom = 387.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_olg7q")
+
+[node name="Label" type="Label" parent="User Interface/tutorial1" unique_id=155000830]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 72.0
+offset_top = 422.0
+offset_right = 1056.0
+offset_bottom = 491.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_8c41q")
+text = "use WASD or arrow keys to move around"
+
+[node name="tutorial2" type="Control" parent="User Interface" unique_id=983564175]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="User Interface/tutorial2" unique_id=2143424233]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 107.0
+offset_top = 105.0
+offset_right = 996.0
+offset_bottom = 392.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_8iemx")
+
+[node name="Label" type="Label" parent="User Interface/tutorial2" unique_id=1697110519]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 84.0
+offset_top = 423.0
+offset_right = 1026.0
+offset_bottom = 478.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_8c41q")
+theme_override_font_sizes/font_size = 40
+text = "Press E to open chests to get weapons or potions"
+
+[node name="tutorial3" type="Control" parent="User Interface" unique_id=996109645]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="User Interface/tutorial3" unique_id=1500747395]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = 470.0
+offset_right = 273.30737
+offset_bottom = 588.0421
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1400485
+texture = ExtResource("9_64w2a")
+
+[node name="TextureRect2" type="TextureRect" parent="User Interface/tutorial3" unique_id=223985889]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 278.0
+offset_top = 466.99994
+offset_right = 371.30737
+offset_bottom = 585.04205
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1400485
+texture = ExtResource("9_64w2a")
+
+[node name="Label" type="Label" parent="User Interface/tutorial3" unique_id=2109629638]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 80.0
+offset_top = 254.0
+offset_right = 1064.0
+offset_bottom = 323.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_8c41q")
+text = "Use 1 and 2 to swap item slots"
+
+[node name="tutorial4" type="Control" parent="User Interface" unique_id=337313748]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="User Interface/tutorial4" unique_id=22655118]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 298.0
+offset_top = 12.0
+offset_right = 787.0
+offset_bottom = 371.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_fpun6")
+
+[node name="Label" type="Label" parent="User Interface/tutorial4" unique_id=156384118]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 270.0
+offset_top = 397.0
+offset_right = 1254.0
+offset_bottom = 466.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_8c41q")
+text = "Left mouse button to attack"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1717291227]
 modulate = Color(0.050980393, 0.57254905, 1, 1)

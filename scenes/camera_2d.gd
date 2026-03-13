@@ -1,8 +1,8 @@
 extends Camera2D
 
 # --- CONFIGURATION ---
-@export var offset_factor: float = 0.3  # How far the camera moves toward the cursor (0 = player, 1 = cursor)
-@export var smoothing_speed: float = 5.0  # Higher = faster camera movement
+@export var offset_factor: float = 0.7  # How far the camera moves toward the cursor (0 = player, 1 = cursor)
+@export var smoothing_speed: float = 10.0  # Higher = faster camera movement
 
 # --- REFERENCE ---
 @export var player: NodePath  # Drag your player node here in the inspector

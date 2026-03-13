@@ -270,14 +270,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Customize"
 
-[node name="Button4" type="Button" parent="." unique_id=1291445860]
-offset_left = 465.0
-offset_top = 505.0
-offset_right = 687.0
-offset_bottom = 567.0
-pivot_offset = Vector2(46, 189)
-text = "Tutorial"
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=492624257]
 position = Vector2(825, 596)
 emitting = false
@@ -287,6 +279,12 @@ lifetime = 2.1599999999999997
 explosiveness = 1.0
 randomness = 0.65
 process_material = SubResource("ParticleProcessMaterial_cv0gf")
+
+[node name="settings menu" type="Control" parent="." unique_id=1865378090]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
