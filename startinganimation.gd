@@ -7,8 +7,6 @@ func _ready() -> void:
 	Parallax2d.visible = false
 	$AnimatedSprite2D.stop()
 	$AnimatedSprite2D.frame = 0
-	$Button3.pressed.connect(Callable(self, "_on_settings_pressed"))
-
 
 func _on_settings_pressed() -> void:
 	settings_menu.visible = true
@@ -41,10 +39,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_button_pressed() -> void:
-	$Button.hide()
-	$Button2.hide()
-	$Button3.hide()
-	$ColorPicker.hide()
 	$AnimatedSprite2D.play("default")
 	$AnimatedSprite2D/AnimationPlayer.play("startinganimation")
 
