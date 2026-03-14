@@ -41,7 +41,7 @@ func _physics_process(delta):
 	weapon_pivot.position = Vector2.ZERO
 	weapon_pivot.rotation = (rotation - rotation_offset) + _swing_offset
 	_update_weapon()
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_pressed("attack"):
 		if UserInterface.weapon != null and not _is_swinging:
 			UserInterface.shakeamount += 20
 			$AudioStreamPlayer.play()

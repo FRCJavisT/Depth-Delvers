@@ -13,6 +13,8 @@ config_version=5
 config/name="Hungry Shark Evolution"
 run/main_scene="uid://ew1tqrjoh82i"
 config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://bbbaqfbf0h0wf"
 config/icon="res://sprites/icon.svg"
 
 [autoload]
@@ -29,9 +31,12 @@ GlobalWorldEnvironment="*uid://bd75ipswg6qls"
 
 [display]
 
-window/size/mode=4
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[gui]
+
+theme/custom_font="uid://caumtig8pnegp"
 
 [input]
 

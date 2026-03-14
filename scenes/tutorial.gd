@@ -6,7 +6,6 @@ func _input(event: InputEvent) -> void:
 	if !UserInterface.hasdonetutorial:
 		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
 			if tutorialstep == 1:
-				UserInterface.hasdonetutorial = true
 				tutorialstep = 2
 				$AnimationPlayer.play("step1finished")
 		if Input.is_action_just_pressed("interact"):

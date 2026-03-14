@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://ru8uj4qu2kog" path="res://shinyfilter.tres" id="5_cv0gf"]
 [ext_resource type="Theme" uid="uid://g3t1lj8d0ewr" path="res://texttheme.tres" id="5_f2fal"]
 [ext_resource type="Texture2D" uid="uid://bbbaqfbf0h0wf" path="res://Gold Deluxe Splendid Luxury Jewelry Logo (1).png" id="6_f2fal"]
+[ext_resource type="AudioStream" uid="uid://bos648jr71mx5" path="res://universfield-water-splash-02-352021.mp3" id="8_iptgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rne6"]
 atlas = ExtResource("3_wf68u")
@@ -141,6 +142,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../AudioStreamPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_wf68u"]
 resource_name = "startinganimation"
@@ -204,6 +217,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../AudioStreamPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.99),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5rne6"]
@@ -335,6 +360,9 @@ offset_bottom = 1883.0
 scale = Vector2(0.3337355, 0.28599268)
 mouse_filter = 2
 texture = ExtResource("6_f2fal")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2045577143]
+stream = ExtResource("8_iptgy")
 
 [connection signal="animation_finished" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="color_changed" from="ColorPicker" to="." method="_on_color_picker_color_changed"]
