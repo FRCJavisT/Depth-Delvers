@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b63fgtr067ugy" path="res://pixil-frame-0.png" id="2_fnro5"]
 [ext_resource type="Texture2D" uid="uid://bnlv6k7wtf1wr" path="res://sprites/image-removebg-preview.png" id="3_5unt8"]
 [ext_resource type="Texture2D" uid="uid://cwdw2ioqag3om" path="res://Redsquare.png" id="4_n7q0t"]
-[ext_resource type="Texture2D" uid="uid://bqh0mw54b554v" path="res://spritesheet_2.webp" id="5_ny7kq"]
+[ext_resource type="Texture2D" uid="uid://dv5hktd7pf5je" path="res://spritesheet_5.webp" id="4_ypccl"]
 [ext_resource type="Theme" uid="uid://d0s203toj4ts4" path="res://theme.tres" id="6_ckp65"]
 [ext_resource type="AudioStream" uid="uid://dhvjwc2m32i4a" path="res://u_nfmiq7z9as-bullethit-449809.mp3" id="7_jff70"]
 [ext_resource type="AudioStream" uid="uid://cjyfew2xl53lk" path="res://dragon-studio-zap-hit-474055.mp3" id="8_o8xpg"]
@@ -63,36 +63,36 @@ scale_min = 0.01
 scale_max = 0.02
 color_ramp = SubResource("GradientTexture1D_vr0jt")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_esk37"]
-atlas = ExtResource("5_ny7kq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8gt0"]
+atlas = ExtResource("4_ypccl")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tl7ku"]
-atlas = ExtResource("5_ny7kq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnro5"]
+atlas = ExtResource("4_ypccl")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5sg05"]
-atlas = ExtResource("5_ny7kq")
-region = Rect2(0, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_5unt8"]
+atlas = ExtResource("4_ypccl")
+region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1w318"]
-atlas = ExtResource("5_ny7kq")
-region = Rect2(32, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7q0t"]
+atlas = ExtResource("4_ypccl")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vr0jt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_esk37")
+"texture": SubResource("AtlasTexture_f8gt0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tl7ku")
+"texture": SubResource("AtlasTexture_fnro5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5sg05")
+"texture": SubResource("AtlasTexture_5unt8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1w318")
+"texture": SubResource("AtlasTexture_n7q0t")
 }],
 "loop": true,
 "name": &"default",
@@ -273,6 +273,7 @@ process_material = SubResource("ParticleProcessMaterial_m1vyk")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=589016678]
 texture_filter = 1
+position = Vector2(-2.3, -3.4000015)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_vr0jt")
 autoplay = "default"
@@ -290,11 +291,10 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_hurt")
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1913419550]
-visible = false
-offset_left = -118.0
-offset_top = -122.0
-offset_right = 116.0
-offset_bottom = -95.0
+offset_left = -117.0
+offset_top = -98.2
+offset_right = 117.0
+offset_bottom = -71.2
 theme = ExtResource("6_ckp65")
 value = 100.0
 
