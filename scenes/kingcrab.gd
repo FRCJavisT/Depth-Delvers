@@ -9,7 +9,7 @@ var maxhealth = 100
 
 func _ready() -> void:
 	
-	maxhealth = UserInterface.level * 200
+	maxhealth = (UserInterface.level * 200) + 100
 	enemyhealth = maxhealth
 	$ProgressBar.max_value = enemyhealth
 	# Randomise start time and direction so each stingray feels independent
@@ -17,7 +17,7 @@ func _ready() -> void:
 	$HurtArea.body_exited.connect(_on_body_exited)
 	
 func _process(delta: float) -> void:
-	$ProgressBar.value = (enemyhealth / maxhealth) * 100
+	$ProgressBar.value = enemyhealth
 	
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "miner":

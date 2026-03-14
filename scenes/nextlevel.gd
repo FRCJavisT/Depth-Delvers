@@ -6,7 +6,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.name == "miner":
 		UserInterface.level += 1
 		LayerPopup.show_layer(UserInterface.level + 1)
-		if UserInterface.level % 3 == 0:
+		if UserInterface.level % 2 == 0:
 			transition.transition("res://scenes/bosslevel.tscn")
 		else:
 			transition.transition(levels[randi_range(0,3)])
