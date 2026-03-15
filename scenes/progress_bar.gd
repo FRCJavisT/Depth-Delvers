@@ -51,6 +51,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if get_tree().paused:
+		return
 	UserInterface.oxygen -= 1.0 * delta
 	UserInterface.oxygen = clampf(UserInterface.oxygen, 0.0, 100.0)
 	value = UserInterface.oxygen

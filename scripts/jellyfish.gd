@@ -64,7 +64,7 @@ func _on_area_entered(area: Area2D) -> void:
 		enemyhealth -= UserInterface.damage
 		UserInterface.shakeamount += 40
 		$bloodeffect.emitting = true
-		if enemyhealth < 0:
+		if enemyhealth <= 0:
 			GlobalWorldEnvironment.get_node("zap").blood()
 			$AudioStreamPlayer.play()
 			$AnimationPlayer.play("death")

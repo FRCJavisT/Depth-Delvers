@@ -57,7 +57,6 @@ func _process(delta: float) -> void:
 		UserInterface.shakeamount += 50
 		UserInterface.knockback = -10
 		UserInterface.oxygen -= DAMAGE_PER_SECOND
-		var player_pos=_player.global_position
 		
 func _on_body_exited(body: Node2D) -> void:
 	if body.name == "miner":
@@ -71,7 +70,7 @@ func _on_hurt_area_area_entered(area: Area2D) -> void:
 		enemyhealth -= UserInterface.damage
 		UserInterface.shakeamount += 40
 		$bloodeffect.emitting = true
-		if enemyhealth < 0:
+		if enemyhealth <= 0:
 			GlobalWorldEnvironment.get_node("zap").blood()
 			$AudioStreamPlayer.play()
 			UserInterface.oxygen += 20
