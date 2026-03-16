@@ -46,7 +46,8 @@ func transition(scenepath: String) -> void:
 	get_tree().paused = false
 	_set_overlay(false)
 	InventoryUI.visible = true
-	PromptUI.visible = true
+	PromptUI.visible = false
+	PromptUI.hide_prompt()
 
 	$GPUParticles2D.emitting = true
 	$AnimationPlayer.play("fadein")
@@ -86,7 +87,8 @@ func _set_paused(paused: bool) -> void:
 	else:
 		$AudioStreamPlayer.play()
 		InventoryUI.visible = true
-		PromptUI.visible = true
+		PromptUI.visible = false
+		PromptUI.hide_prompt()
 		if scene:
 			var ui := scene.get_node_or_null("User Interface")
 			if ui:
